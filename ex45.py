@@ -7,15 +7,28 @@ class Zoo:
             self.cages.append(cage)
 
     def animals_by_color(self, color):
-        pass
-
+        right_color_animal = []
+        for cage in self.cages:
+            for animal in cage.animals:
+                if animal.color == color:
+                    right_color_animal.append(animal)
+        return right_color_animal
+    
     def animals_by_legs(self, legs):
-        pass
-
+        right_legs_animal = []
+        for cage in self.cages:
+            for animal in cage.animals:
+                if animal.number_of_legs == legs:
+                    right_legs_animal.append(animal)
+        return right_legs_animal
+    
     def number_of_legs(self):
-        pass
+        total_legs = 0
+        for cage in self.cages:
+            for animal in cage.animals:
+                total_legs += animal.number_of_legs
 
-
+        return total_legs
 class Cage:
     def __init__(self, id):
         self.id = id
@@ -62,3 +75,22 @@ class Snake(Animal):
 class Parrot(Animal):
     def __init__(self, color):
         super().__init__(color,2)
+
+
+sheep = Sheep('white')
+wolf = Wolf('black')
+snake = Snake('red')
+parrot = Parrot('red')
+
+c1 = Cage(1)
+c1.add_animals(sheep, wolf)
+print(c1)
+c2 = Cage(2)
+c2.add_animals(snake, parrot)
+print(c2)
+
+z1 = Zoo()
+z1.add_cages(c1, c2)
+print(z1.animals_by_color('red'))
+print(z1.animals_by_legs(4))
+print(z1.number_of_legs())
